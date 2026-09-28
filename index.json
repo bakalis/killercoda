@@ -1,0 +1,52 @@
+{
+  "title": "Terraform Infrastructure as Code: Drift, Repair and Scaling",
+  "details": {
+    "intro": "intro.md",
+    "steps": [
+      {
+        "title": "1. The problem: manual infrastructure",
+        "text": "step1/step1.md"
+      },
+      {
+        "title": "2. Provision the application with Terraform",
+        "text": "step2/step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "3. Understand dependencies and state",
+        "text": "step3/step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "4. Change infrastructure through code",
+        "text": "step4/step4.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "5. Create and repair configuration drift",
+        "text": "step5/step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "6. Scale the service to three replicas",
+        "text": "step6/step6.md",
+        "verify": "step6/verify.sh"
+      },
+      {
+        "title": "7. Add load balancing with Nginx",
+        "text": "step7/step7.md",
+        "verify": "step7/verify.sh"
+      },
+      {
+        "title": "8. Reflection",
+        "text": "step8/step8.md"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}
