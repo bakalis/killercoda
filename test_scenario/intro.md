@@ -10,7 +10,7 @@ During the scenario you will deliberately create infrastructure drift, repair it
 
 ### Final architecture
 
-![Final application architecture](assets/architecture.svg)
+![Final application architecture](./assets/architecture.svg)
 
 ```text
                          Nginx
@@ -43,7 +43,7 @@ After completing this scenario, you will be able to:
 
 ## Terraform workflow
 
-![Terraform reconciliation workflow](assets/lifecycle.svg)
+![Terraform reconciliation workflow](./assets/lifecycle.svg)
 
 ## How the lab works
 
