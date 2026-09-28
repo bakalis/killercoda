@@ -13,19 +13,19 @@ docker run -d \
   hashicorp/http-echo:1.0 \
   -listen=:8080 \
   -text="Hello from the manually deployed backend"
-```
+```{{exec}}
 
 Verify the container:
 
 ```bash
 docker ps
-```
+```{{exec}}
 
 And query it:
 
 ```bash
 curl http://localhost:8080
-```
+```{{exec}}
 
 There is nothing wrong with these commands. The problem is that the infrastructure is encoded as a **sequence of imperative commands**.
 

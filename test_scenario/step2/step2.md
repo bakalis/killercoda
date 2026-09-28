@@ -4,13 +4,13 @@ The lab has prepared a Terraform configuration in:
 
 ```bash
 cd /root/terraform-iac
-```
+```{{exec}}
 
 Inspect it:
 
 ```bash
 sed -n '1,240p' main.tf
-```
+```{{exec}}
 
 Notice the resources:
 
@@ -33,7 +33,7 @@ Terraform first needs to install its provider:
 
 ```bash
 terraform init
-```
+```{{exec}}
 
 The Docker provider allows Terraform to manage Docker resources through the Docker API.
 
@@ -43,7 +43,7 @@ Run:
 
 ```bash
 terraform plan
-```
+```{{exec}}
 
 Read the plan before applying it.
 
@@ -55,7 +55,7 @@ Now create the infrastructure:
 
 ```bash
 terraform apply
-```
+```{{exec}}
 
 Type `yes` when Terraform asks for confirmation.
 
@@ -63,13 +63,13 @@ Check the resulting containers:
 
 ```bash
 docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Status}}'
-```
+```{{exec}}
 
 Finally, query the application:
 
 ```bash
 curl http://localhost:8080
-```
+```{{exec}}
 
 You should receive a response from `backend-0`.
 

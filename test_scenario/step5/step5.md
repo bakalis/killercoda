@@ -16,13 +16,13 @@ Run:
 
 ```bash
 docker rm -f terraform-backend-0
-```
+```{{exec}}
 
 Check:
 
 ```bash
 docker ps --format '{{.Names}}'
-```
+```{{exec}}
 
 The backend is gone.
 
@@ -32,14 +32,14 @@ Try:
 
 ```bash
 curl http://localhost:8080
-```
+```{{exec}}
 
 Now ask Terraform what it thinks should happen:
 
 ```bash
 cd /root/terraform-iac
 terraform plan
-```
+```{{exec}}
 
 Terraform should propose recreating the missing backend.
 
@@ -49,19 +49,19 @@ Apply the plan:
 
 ```bash
 terraform apply
-```
+```{{exec}}
 
 Then check:
 
 ```bash
 docker ps --format '{{.Names}}'
-```
+```{{exec}}
 
 and:
 
 ```bash
 curl http://localhost:8080
-```
+```{{exec}}
 
 The backend should be running again.
 

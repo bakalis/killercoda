@@ -8,7 +8,7 @@ Open the Terraform configuration:
 
 ```bash
 nano /root/terraform-iac/main.tf
-```
+```{{exec}}
 
 Find:
 
@@ -29,7 +29,7 @@ Now preview the change:
 ```bash
 cd /root/terraform-iac
 terraform plan
-```
+```{{exec}}
 
 Terraform should detect that the backend container configuration has changed.
 
@@ -37,13 +37,13 @@ Apply the change:
 
 ```bash
 terraform apply
-```
+```{{exec}}
 
 Then:
 
 ```bash
 curl http://localhost:8080
-```
+```{{exec}}
 
 You should see the new response.
 

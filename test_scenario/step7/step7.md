@@ -17,7 +17,7 @@ Inspect the relevant part:
 ```bash
 cd /root/terraform-iac
 sed -n '55,120p' main.tf
-```
+```{{exec}}
 
 The configuration is constructed from:
 
@@ -47,7 +47,7 @@ Run:
 
 ```bash
 terraform plan
-```
+```{{exec}}
 
 Terraform should detect that the Nginx configuration needs to change.
 
@@ -55,7 +55,7 @@ Apply it:
 
 ```bash
 terraform apply
-```
+```{{exec}}
 
 Now Nginx is the load-balancing layer:
 
@@ -78,7 +78,7 @@ for i in {1..12}; do
   curl -s http://localhost:8080
   echo
 done
-```
+```{{exec}}
 
 You should see responses from different backend containers.
 

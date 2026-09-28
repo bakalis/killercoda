@@ -8,7 +8,7 @@ Inspect the Terraform graph:
 
 ```bash
 terraform graph
-```
+```{{exec}}
 
 The raw output is Graphviz DOT. You should be able to identify relationships such as:
 
@@ -50,7 +50,7 @@ Now inspect the resources Terraform knows about:
 
 ```bash
 terraform state list
-```
+```{{exec}}
 
 You should see resources such as:
 
@@ -67,7 +67,7 @@ Inspect it with:
 
 ```bash
 terraform show
-```
+```{{exec}}
 
 ### Key idea
 

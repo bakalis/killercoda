@@ -12,7 +12,7 @@ Open:
 
 ```bash
 nano /root/terraform-iac/variables.tf
-```
+```{{exec}}
 
 Change:
 
@@ -53,7 +53,7 @@ Run:
 ```bash
 cd /root/terraform-iac
 terraform plan
-```
+```{{exec}}
 
 Look for Terraform proposing two additional backend containers.
 
@@ -78,13 +78,13 @@ Run:
 
 ```bash
 terraform apply
-```
+```{{exec}}
 
 Then:
 
 ```bash
 docker ps --format '{{.Names}}'
-```
+```{{exec}}
 
 You should now see:
 
