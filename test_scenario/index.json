@@ -1,7 +1,10 @@
 {
   "title": "Terraform Infrastructure as Code: Drift, Repair and Scaling",
   "details": {
-    "intro": "intro.md",
+    "intro": {
+      "text": "intro.md",
+      "background": "background.sh"
+    },
     "steps": [
       {
         "title": "1. The problem: manual infrastructure",
