@@ -1,0 +1,31 @@
+{
+  "title": "Zero-downtime infrastructure changes with Terraform lifecycle rules",
+  "description": "Measure the outage caused by Terraform's default destroy-then-create, then remove it step by step with create_before_destroy, health checks, replace_triggered_by and prevent_destroy.",
+  "details": {
+    "intro": {
+      "text": "intro.md",
+      "background": "setup/background.sh",
+      "foreground": "setup/foreground.sh"
+    },
+    "steps": [
+      { "title": "Deploy the baseline and start measuring", "text": "step1/text.md", "verify": "step1/verify.sh" },
+      { "title": "Observe the outage (default behaviour)", "text": "step2/text.md", "verify": "step2/verify.sh" },
+      { "title": "Fix the order: create_before_destroy", "text": "step3/text.md", "verify": "step3/verify.sh" },
+      { "title": "Fix readiness: health checks", "text": "step4/text.md", "verify": "step4/verify.sh" },
+      { "title": "Fix silent config changes: replace_triggered_by", "text": "step5/text.md", "verify": "step5/verify.sh" },
+      { "title": "Protect stateful data: prevent_destroy", "text": "step6/text.md", "verify": "step6/verify.sh" },
+      { "title": "Reflect and clean up", "text": "step7/text.md" }
+    ],
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "host01": [
+        { "file": "*", "target": "/root/assets", "chmod": "+x" }
+      ]
+    }
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}
