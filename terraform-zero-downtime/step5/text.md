@@ -28,10 +28,26 @@ Terraform says **No changes**, and the app still serves the old banner. The chan
  }
 ```
 
+![Chain of four resources: the content of config/banner.txt is hashed by filemd5 into terraform_data.config. When the hash changes, that resource is updated in place, which replaces terraform_data.release through replace_triggered_by. The new id of the release marker is part of the container name, so the container is replaced. A new app_version replaces the release marker in the same way.](./trigger-chain.svg)
+
+*One changed file sets off the whole chain. A new version enters the same chain one link further down, so both kinds of change end in the same safe rollout.*
+
+Put the change in place:
+
 ```bash
 diff -u main.tf stages/stage5.tf
 cp stages/stage5.tf main.tf
+```{{exec}}
+
+Apply it:
+
+```bash
 terraform apply -auto-approve
+```{{exec}}
+
+Then ask the app for its banner:
+
+```bash
 curl -s localhost:8080
 ```{{exec}}
 
@@ -46,6 +62,11 @@ Read the plan: `terraform_data.config` is updated in place, `terraform_data.rele
 
 ```bash
 terraform apply -auto-approve
+```{{exec}}
+
+Record the result and look at the banner again:
+
+```bash
 score "step 5: config change"
 curl -s localhost:8080
 ```{{exec}}

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="352" viewBox="0 0 640 352" role="img" aria-labelledby="title desc" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#0b0b0b">
+  <title id="title">Architecture of the lab</title>
+  <desc id="desc">The traffic generator sends requests to the nginx load balancer on localhost port 8080. The load balancer looks up the name app in Docker DNS and forwards each request to the app container. A Redis store with a data volume is added in step 6. Terraform creates, replaces and destroys everything inside the Docker network; the traffic generator runs outside it.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#52514e"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="639" height="351" rx="10" fill="#fcfcfb" stroke="#e1e0d9"/>
+
+  <!-- outside Terraform: the observer and the tool that changes the stack -->
+  <rect x="32" y="22" width="240" height="54" rx="6" fill="#ffffff" stroke="#c3c2b7"/>
+  <text x="48" y="45" font-size="13.5" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace">traffic-gen</text>
+  <text x="48" y="63" font-size="12" fill="#52514e">about 10 requests per second</text>
+  <rect x="368" y="22" width="240" height="54" rx="6" fill="#ffffff" stroke="#c3c2b7"/>
+  <text x="384" y="45" font-size="13.5" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace">terraform apply</text>
+  <text x="384" y="63" font-size="12" fill="#52514e">run by you, reads main.tf</text>
+
+  <!-- everything Terraform manages -->
+  <rect x="16" y="118" width="608" height="214" rx="10" fill="#edf4fd" stroke="#2a78d6"/>
+  <text x="608" y="142" text-anchor="end" font-weight="600" fill="#1c5cab">Managed by Terraform, on the Docker network “lab”</text>
+  <rect x="32" y="160" width="240" height="54" rx="6" fill="#ffffff" stroke="#c3c2b7"/>
+  <text x="48" y="183" font-size="13.5" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace">lb</text>
+  <text x="48" y="201" font-size="12" fill="#52514e">nginx, published on port 8080</text>
+  <rect x="32" y="262" width="240" height="54" rx="6" fill="#ffffff" stroke="#c3c2b7"/>
+  <text x="48" y="285" font-size="13.5" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace">app-&lt;id&gt;</text>
+  <text x="48" y="303" font-size="12" fill="#52514e">stateless, network alias “app”</text>
+  <rect x="368" y="160" width="240" height="54" rx="6" fill="#ffffff" stroke="#c3c2b7"/>
+  <text x="384" y="183" font-size="13.5" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace">store</text>
+  <text x="384" y="201" font-size="12" fill="#52514e">Redis, stateful</text>
+  <rect x="550" y="170" width="46" height="18" rx="9" fill="#edf4fd" stroke="#2a78d6" stroke-width="0.75"/>
+  <text x="573" y="183" text-anchor="middle" font-size="10.5" fill="#1c5cab">step 6</text>
+  <rect x="368" y="262" width="240" height="54" rx="6" fill="#ffffff" stroke="#c3c2b7"/>
+  <text x="384" y="285" font-size="13.5" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace">store-data</text>
+  <text x="384" y="303" font-size="12" fill="#52514e">Docker volume</text>
+  <rect x="550" y="272" width="46" height="18" rx="9" fill="#edf4fd" stroke="#2a78d6" stroke-width="0.75"/>
+  <text x="573" y="285" text-anchor="middle" font-size="10.5" fill="#1c5cab">step 6</text>
+
+  <!-- who talks to whom -->
+  <line x1="152.0" y1="76" x2="152.0" y2="158" stroke="#52514e" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="164.0" y="101" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace">GET localhost:8080</text>
+  <line x1="152.0" y1="214" x2="152.0" y2="260" stroke="#52514e" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="164.0" y="241" font-size="12">looks up “app” in Docker DNS</text>
+  <line x1="488.0" y1="214" x2="488.0" y2="260" stroke="#52514e" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="500.0" y="241" font-size="12">mounts /data</text>
+  <line x1="488.0" y1="76" x2="488.0" y2="116" stroke="#52514e" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="476.0" y="101" font-size="12" text-anchor="end">creates, replaces, destroys</text>
+</svg>

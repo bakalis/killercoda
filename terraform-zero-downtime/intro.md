@@ -19,19 +19,9 @@ By the end you will be able to:
 
 ## Architecture
 
-```
-  traffic-gen  (outside Terraform: ~10 requests/second, counts OK / FAILED)
-       │
-       ▼  localhost:8080
-  ┌───────────┐        Docker network "lab"
-  │    lb     │───────────────┐
-  │  (nginx)  │               ▼
-  └───────────┘        ┌──────────────┐        ┌────────────────────────┐
-   resolves "app"      │  app-<id>    │        │  store  + volume       │
-   via Docker DNS      │  stateless   │        │  stateful, added in    │
-                       │  alias "app" │        │  step 6                │
-                       └──────────────┘        └────────────────────────┘
-```
+![Architecture of the lab: the traffic generator calls the nginx load balancer on localhost:8080. The load balancer looks up "app" in Docker DNS and forwards each request to the app container. A Redis store with a data volume is added in step 6. Terraform manages everything on the Docker network; the traffic generator runs outside it.](./architecture.svg)
+
+*Requests travel down the left column. Terraform changes the stack while the traffic generator, which Terraform does not manage, keeps measuring it.*
 
 | Component | Managed by Terraform? | Why |
 |---|---|---|
