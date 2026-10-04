@@ -19,15 +19,15 @@ By the end you will be able to:
 
 ## Architecture
 
-![Architecture of the lab: the traffic generator calls the nginx load balancer on localhost:8080. The load balancer looks up "app" in Docker DNS and forwards each request to the app container. A Redis store with a data volume is added in step 6. Terraform manages everything on the Docker network; the traffic generator runs outside it.](./architecture.svg)
+![Architecture of the lab: the traffic generator calls the nginx load balancer on localhost:8080. The load balancer looks up "app" in Docker DNS and forwards each request to the app container. From step 6 the app reads and writes values in a Redis store, which keeps them on a data volume. Terraform manages everything on the Docker network; the traffic generator runs outside it.](./architecture.svg)
 
-*Requests travel down the left column. Terraform changes the stack while the traffic generator, which Terraform does not manage, keeps measuring it.*
+*Requests travel down the left column, and from step 6 on into the store. Terraform changes the stack while the traffic generator, which Terraform does not manage, keeps measuring it.*
 
 | Component | Managed by Terraform? | Why |
 |---|---|---|
 | `lb` (nginx) | yes | Load balancer, the only published port. It looks up the name `app` through Docker DNS on every request, so it automatically follows containers that appear or disappear. |
-| `app-<id>` | yes | The stateless application we keep upgrading. Takes 5 seconds to boot (simulated), so "running" and "ready" are different moments. |
-| `store` + volume | yes (step 6) | Stateful tier. Needs the opposite treatment from the app. |
+| `app-<id>` | yes | The stateless application we keep upgrading. Takes 5 seconds to boot (simulated), so "running" and "ready" are different moments. It keeps no data itself. |
+| `store` + volume | yes (step 6) | Stateful tier: the app reads and writes its values here. Needs the opposite treatment from the app. |
 | `traffic-gen` | **no** | The observer must not be replaced by the experiment it measures. |
 
 ## How you will measure
