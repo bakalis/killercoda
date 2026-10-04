@@ -7,6 +7,7 @@ index.json          scenario definition (intro, 7 steps, finish, assets)
 intro.md / finish.md
 setup/              background.sh installs Terraform and prepares the lab; foreground.sh waits for it
 step1 … step7/      text.md (+ verify.sh for the "Check" button, steps 1–6)
+*.svg               figures, each next to the markdown file that shows it (architecture.svg, stepN/*.svg)
 assets/             uploaded to /root/assets: app, nginx config, traffic/score scripts, one main.tf per stage
 ```
 

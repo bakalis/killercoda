@@ -9,6 +9,7 @@ You measured an outage caused by Terraform's default behaviour and removed it wi
 - Hidden dependencies need to be made explicit (`replace_triggered_by`).
 - Stateless and stateful resources need opposite treatment (`prevent_destroy`, no overlap).
 - Lifecycle rules give *near*-zero downtime for simple topologies. They are not a replacement for a real rollout mechanism.
+- Infrastructure as code is also a **record**. Every deployment in this tutorial started as a change to a file: a new version, a new rule, a new banner. Keep those files in Git and apply only what is committed, and each deployment is documented twice: the code says what is running, and the history says who changed it, when and why. Heavily audited environments can use exactly this as their deployment process, because the audit trail is a by-product of the work instead of an extra task.
 
 **Further reading**
 

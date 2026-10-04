@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="222" viewBox="0 0 640 222" role="img" aria-labelledby="title desc" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#0b0b0b">
+  <title id="title">create_before_destroy with a health check and wait</title>
+  <desc id="desc">Terraform creates the new container, waits until its health check passes and only then destroys the old one. The two containers overlap, so a ready container exists at every moment.</desc>
+  <defs>
+    <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="7" height="7" fill="#fdf1d3"/>
+      <rect width="2" height="7" fill="#f2cf7f"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#52514e"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="639" height="221" rx="10" fill="#fcfcfb" stroke="#e1e0d9"/>
+
+  <!-- lanes -->
+  <rect x="138" y="62" width="482" height="28" rx="4" fill="#f0efec"/>
+  <text x="24" y="74" font-weight="600">old container</text>
+  <text x="24" y="87" font-size="11.5" fill="#52514e">v3.0</text>
+  <rect x="138" y="100" width="482" height="28" rx="4" fill="#f0efec"/>
+  <text x="24" y="112" font-weight="600">new container</text>
+  <text x="24" y="125" font-size="11.5" fill="#52514e">v4.0</text>
+  <rect x="138" y="148" width="482" height="28" rx="4" fill="#f0efec"/>
+  <text x="24" y="166" font-weight="600">requests</text>
+
+  <!-- what Terraform does, in order -->
+  <line x1="268" y1="48" x2="268" y2="176" stroke="#c3c2b7"/>
+  <circle cx="268" cy="36" r="9" fill="#1c5cab"/>
+  <text x="268" y="40" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">1</text>
+  <text x="253" y="40" text-anchor="end" font-weight="600">create new</text>
+  <line x1="440" y1="48" x2="440" y2="176" stroke="#c3c2b7"/>
+  <circle cx="440" cy="36" r="9" fill="#1c5cab"/>
+  <text x="440" y="40" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">2</text>
+  <text x="455" y="40" font-weight="600">destroy old</text>
+  <line x1="282" y1="36" x2="426" y2="36" stroke="#52514e" marker-end="url(#arrow)"/>
+  <text x="354" y="27" text-anchor="middle" fill="#52514e">waits until healthy</text>
+
+  <!-- state of each container, and what the traffic generator sees -->
+  <rect x="138" y="62" width="300" height="28" rx="4" fill="#dcf2dc" stroke="#0ca30c"/>
+  <text x="288" y="80" text-anchor="middle">serving</text>
+  <rect x="268" y="100" width="154" height="28" rx="4" fill="url(#hatch)" stroke="#c98500"/>
+  <text x="345" y="118" text-anchor="middle">booting, about 5 s</text>
+  <rect x="424" y="100" width="196" height="28" rx="4" fill="#dcf2dc" stroke="#0ca30c"/>
+  <text x="522" y="118" text-anchor="middle">serving</text>
+  <rect x="138" y="148" width="482" height="28" rx="4" fill="#dcf2dc" stroke="#0ca30c"/>
+  <text x="379" y="166" text-anchor="middle">200 OK, no gap</text>
+
+  <!-- the span this step is about -->
+  <path d="M268 184 v6 H440 v-6" fill="none" stroke="#52514e" stroke-width="1.5"/>
+  <text x="354" y="206" text-anchor="middle" font-weight="600">overlap</text>
+  <text x="620" y="206" text-anchor="end" font-size="11.5" fill="#52514e">time →</text>
+</svg>

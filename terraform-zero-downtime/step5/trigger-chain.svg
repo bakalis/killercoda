@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-labelledby="title desc" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#0b0b0b">
+  <title id="title">How a config change reaches the container</title>
+  <desc id="desc">Chain of four resources. The content of config/banner.txt is hashed by filemd5 into terraform_data.config. When the hash changes, that resource is updated in place, which triggers the replacement of terraform_data.release through replace_triggered_by. Its new id is part of the container name, so docker_container.app is replaced. A change of var.app_version replaces the release marker in the same way.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#52514e"/>
+    </marker>
+    <marker id="arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1c5cab"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="639" height="359" rx="10" fill="#fcfcfb" stroke="#e1e0d9"/>
+
+  <!-- one change travels down the chain -->
+  <rect x="32" y="22" width="260" height="52" rx="6" fill="#ffffff" stroke="#c3c2b7"/>
+  <text x="48" y="45" font-size="13.5" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace">config/banner.txt</text>
+  <text x="48" y="63" font-size="12" fill="#52514e">the content changes</text>
+  <rect x="32" y="110" width="260" height="52" rx="6" fill="#ffffff" stroke="#c3c2b7"/>
+  <text x="48" y="133" font-size="13.5" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace">terraform_data.config</text>
+  <text x="48" y="151" font-size="12" fill="#52514e">updated in place: new hash</text>
+  <rect x="32" y="198" width="260" height="52" rx="6" fill="#ffffff" stroke="#c3c2b7"/>
+  <text x="48" y="221" font-size="13.5" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace">terraform_data.release</text>
+  <text x="48" y="239" font-size="12" fill="#52514e">replaced: new id</text>
+  <rect x="32" y="286" width="260" height="52" rx="6" fill="#ffffff" stroke="#c3c2b7"/>
+  <text x="48" y="309" font-size="13.5" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace">docker_container.app</text>
+  <text x="48" y="327" font-size="12" fill="#52514e">replaced: new name, safe rollout</text>
+  <line x1="162.0" y1="74" x2="162.0" y2="108" stroke="#52514e" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="174.0" y="95" font-size="12">filemd5() hashes the content</text>
+  <line x1="162.0" y1="162" x2="162.0" y2="196" stroke="#1c5cab" stroke-width="1.5" marker-end="url(#arrow-accent)"/>
+  <text x="174.0" y="183" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" fill="#1c5cab" font-weight="700">replace_triggered_by</text>
+  <line x1="162.0" y1="250" x2="162.0" y2="284" stroke="#52514e" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="174.0" y="271" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace">name = “app-&lt;id&gt;”</text>
+
+  <!-- a new version enters the same chain -->
+  <rect x="420" y="198" width="188" height="52" rx="6" fill="#ffffff" stroke="#c3c2b7"/>
+  <text x="436" y="221" font-size="13.5" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace">var.app_version</text>
+  <text x="436" y="239" font-size="12" fill="#52514e">a new version</text>
+  <line x1="420" y1="224" x2="294" y2="224" stroke="#52514e" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="356" y="216" text-anchor="middle" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace">triggers_replace</text>
+</svg>
